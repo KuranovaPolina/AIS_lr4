@@ -1,7 +1,7 @@
 FROM python:3.7-slim
 
 # for flask web server
-EXPOSE 7878
+EXPOSE 8000
 
 # add files
 ADD . /app
