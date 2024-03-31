@@ -2,3 +2,8 @@ flask
 pyspectator
 psutil
 GPUtil
+gpustat
+# htop
+# nvidia-htop
+# PySensors
+# powermetrics

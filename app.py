@@ -1,5 +1,8 @@
 from flask import Flask, render_template, send_file, jsonify
 
+import py.critical as critical
+from collector import collect 
+
 # initialize flask application
 app = Flask(__name__)
 
@@ -19,7 +22,12 @@ def get_script():
 def get_stat():
     print("stats request")
     # return render_template('index.html')
-    return jsonify(CPUTemp= 123, GPUTemp= 123, CPULoad= 666, GPULoad= 777, RAMLoad= 333)
+    return jsonify(CPUTemp= 123, 
+                   GPUTemp= 123, 
+                   CPULoad= 666, 
+                   GPULoad= 777, 
+                   RAMLoad= 333)
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=8000)
+    collect()
