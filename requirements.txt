@@ -1,0 +1,4 @@
+flask
+pyspectator
+psutil
+GPUtil

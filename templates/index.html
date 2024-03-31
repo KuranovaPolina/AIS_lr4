@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="ru">
+    <head>
+        <title>
+            admin panel
+        </title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+        <!-- <meta http-equiv="refresh" content="5; url=http://www.yourdomain.com/yoursite.html"> -->
+
+        <script src="../js/index.js"></script>
+        <!-- <link rel="stylesheet" href="../css/index.css" type="text/css"> -->
+        
+    </head>
+    <body onload="startPage()">
+        <main id = "main">
+            <div id="variable">
+                <label for="CPUTemp">Температура CPU </label> 
+                <input type="number" readonly="readonly" id="CPUTemp"> <br>
+
+                <label for="GPUTemp">Температура GPU </label> 
+                <input type="number" readonly="readonly" id="GPUTemp"> <br>
+
+                <label for="CPULoad">Нагрузка CPU </label> 
+                <input type="number" readonly="readonly" id="CPULoad"> <br>
+
+                <label for="GPULoad">Нагрузка GPU </label> 
+                <input type="number" readonly="readonly" id="GPULoad"> <br>
+
+                <label for="RAMLoad">Нагрузка RAM </label> 
+                <input type="number" readonly="readonly" id="RAMLoad">
+            </div>
+
+            <div id="variableGraph">
+                <div id="selectFreq">
+                    <input type="radio" id="minute" name="freq" value="minute" checked>
+                    <label for="minute">1 minute</label>
+                    <input type="radio" id="css" name="freq" value="hour">
+                    <label for="hour">1 hour</label>
+                    <input type="radio" id="javascript" name="freq" value="day">
+                    <label for="day">1 day</label>
+                    <input type="radio" id="javascript" name="freq" value="week">
+                    <label for="week">1 week</label>
+
+                    <button>Перерисовать</button>
+                </div>
+
+                <div id="canvas">
+                    <canvas> </canvas>
+                </div>
+            </div>
+ 
+            <div id="criticalParams">
+                <label for="CPUTemp_critical">Критическая температура CPU </label> 
+                <input type="number" id="CPUTemp_critical"> <br>
+
+                <label for="GPUTemp_critical">Критическая температура GPU </label> 
+                <input type="number" id="GPUTemp_critical"> <br>
+
+                <label for="CPULoad_critical">Критическая нагрузка CPU </label> 
+                <input type="number" id="CPULoad_critical"> <br>
+
+                <label for="GPULoad_critical">Критическая нагрузка GPU </label> 
+                <input type="number" id="GPULoad_critical"> <br>
+
+                <label for="RAMLoad_critical">Критическая нагрузка RAM </label> 
+                <input type="number" id="RAMLoad_critical">
+
+                <button>Сохранить</button>
+            </div>           
+        </main>
+    </body>
+</html>
