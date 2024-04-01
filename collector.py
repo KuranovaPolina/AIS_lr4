@@ -96,7 +96,7 @@ def collect():
             new_params['RAMLoad'] >= critical_params['RAMLoad']:
 
             send_mail.send_mail_main()
-            logger.log()
+            logger.log(datetime_now.strftime("%d/%m/%Y %H:%M"))
 
         params.last_params = new_params
         # asd = new_params
