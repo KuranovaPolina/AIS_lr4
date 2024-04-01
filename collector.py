@@ -64,7 +64,7 @@ def collect():
             # 'datetime': datetime.now().strftime("%d/%m/%Y %H:%M:%S"),
             # 'data': getData()
 
-            datetime.now().strftime("%d/%m/%Y %H:§%M"): new_params
+            datetime.now().strftime("%d/%m/%Y %H:%M"): new_params
         }
 
         if new_params['CPUTemp'] >= critical['CPUTemp'] or \
@@ -74,13 +74,14 @@ def collect():
             new_params['RAMLoad'] >= critical['RAMLoad']:
             print("SOMETHING WRONG")
 
-        params.last_params = new_data
+        params.last_params = new_params
+        # asd = new_params
 
         print(params.last_params)
 
         time.sleep(60)
 
-
+# collect()
 # with open('data.json', 'a+') as file:
 #     file.write(json.dumps(new_data))
 #     file.write(',')
