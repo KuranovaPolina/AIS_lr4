@@ -13,3 +13,5 @@ delete:
 	docker rm $(shell docker ps -a -q)
 
 	docker rmi $(shell docker images -a -q)
+
+# rm  ~/.docker/config.json 

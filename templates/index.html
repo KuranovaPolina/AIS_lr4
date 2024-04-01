@@ -54,21 +54,21 @@
  
             <div id="criticalParams">
                 <label for="CPUTemp_critical">Критическая температура CPU </label> 
-                <input type="number" id="CPUTemp_critical"> <br>
+                <input type="number" id="CPUTemp_critical" value="0"> <br>
 
                 <label for="GPUTemp_critical">Критическая температура GPU </label> 
-                <input type="number" id="GPUTemp_critical"> <br>
+                <input type="number" id="GPUTemp_critical" value="0"> <br>
 
                 <label for="CPULoad_critical">Критическая нагрузка CPU </label> 
-                <input type="number" id="CPULoad_critical"> <br>
+                <input type="number" id="CPULoad_critical" value="0"> <br>
 
                 <label for="GPULoad_critical">Критическая нагрузка GPU </label> 
-                <input type="number" id="GPULoad_critical"> <br>
+                <input type="number" id="GPULoad_critical" value="0"> <br>
 
                 <label for="RAMLoad_critical">Критическая нагрузка RAM </label> 
-                <input type="number" id="RAMLoad_critical">
+                <input type="number" id="RAMLoad_critical" value="0">
 
-                <button>Сохранить</button>
+                <button onclick="updateCritical()">Сохранить</button>
             </div>           
         </main>
     </body>

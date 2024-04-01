@@ -1,4 +1,4 @@
-critical = {
+critical_params= {
     "CPUTemp": 90, 
     "GPUTemp": 90, 
     "CPULoad": 85, 

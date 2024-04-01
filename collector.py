@@ -3,11 +3,19 @@ import psutil
 import json
 from datetime import datetime
 
-from py.critical import critical
+# from py.critical import critical_params
 import py.params as params
 import time
 # import gpustat
 # import sensors
+
+critical_params= {
+    "CPUTemp": 90, 
+    "GPUTemp": 90, 
+    "CPULoad": 85, 
+    "GPULoad": 85, 
+    "RAMLoad": 0
+}
 
 def getCPUTemp():
     # tmp = os.popen("powermetrics --samplers smc -n 1 |grep -i 'CPU die temperature'").read()
@@ -67,12 +75,14 @@ def collect():
             datetime.now().strftime("%d/%m/%Y %H:%M"): new_params
         }
 
-        if new_params['CPUTemp'] >= critical['CPUTemp'] or \
-            new_params['GPUTemp'] >= critical['GPUTemp'] or \
-            new_params['CPULoad'] >= critical['CPULoad'] or \
-            new_params['GPULoad'] >= critical['GPULoad'] or \
-            new_params['RAMLoad'] >= critical['RAMLoad']:
+        if new_params['CPUTemp'] >= critical_params['CPUTemp'] or \
+            new_params['GPUTemp'] >= critical_params['GPUTemp'] or \
+            new_params['CPULoad'] >= critical_params['CPULoad'] or \
+            new_params['GPULoad'] >= critical_params['GPULoad'] or \
+            new_params['RAMLoad'] >= critical_params['RAMLoad']:
             print("SOMETHING WRONG")
+            print(new_params)
+            print(critical_params)
 
         params.last_params = new_params
         # asd = new_params

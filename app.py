@@ -1,7 +1,8 @@
-from flask import Flask, render_template, send_file, jsonify
+from flask import Flask, render_template, send_file, jsonify, request
 
-from py.critical import critical
+# import py.critical as critical
 import py.params as params
+import collector
 from collector import collect
 
 import threading
@@ -31,7 +32,22 @@ def get_stat():
                    GPUTemp= params.last_params["GPUTemp"], 
                    CPULoad= params.last_params["CPULoad"], 
                    GPULoad= params.last_params["GPULoad"], 
-                   RAMLoad= params.last_params["RAMLoad"])
+                   RAMLoad= params.last_params["RAMLoad"],
+                   CPUTemp_critical= collector.critical_params["CPUTemp"], 
+                   GPUTemp_critical= collector.critical_params["GPUTemp"], 
+                   CPULoad_critical= collector.critical_params["CPULoad"], 
+                   GPULoad_critical= collector.critical_params["GPULoad"], 
+                   RAMLoad_critical= collector.critical_params["RAMLoad"])
+
+@app.route('/updateCritical', methods=['POST'])
+def updateCritical():
+    print("updateCritical request")
+
+    collector.critical_params = request.json
+
+    print(collector.critical_params)
+
+    return ""
 
 
 def run_server():
