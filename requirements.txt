@@ -3,6 +3,7 @@ pyspectator
 psutil
 GPUtil
 gpustat
+psycopg2-binary
 # htop
 # nvidia-htop
 # PySensors

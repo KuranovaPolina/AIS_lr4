@@ -3,18 +3,21 @@ import psutil
 import json
 from datetime import datetime
 
+
 # from py.critical import critical_params
 import py.params as params
 import time
+
+import psycopg2
 # import gpustat
 # import sensors
 
 critical_params= {
-    "CPUTemp": 90, 
-    "GPUTemp": 90, 
-    "CPULoad": 85, 
-    "GPULoad": 85, 
-    "RAMLoad": 0
+    "CPUTemp": 1, 
+    "GPUTemp": 1, 
+    "CPULoad": 1, 
+    "GPULoad": 1, 
+    "RAMLoad": 1
 }
 
 def getCPUTemp():
@@ -66,14 +69,18 @@ def getData():
     return res
 
 def collect():
-    while 1:
-        new_params = getData()
-        new_data = {
-            # 'datetime': datetime.now().strftime("%d/%m/%Y %H:%M:%S"),
-            # 'data': getData()
+    try:
+        conn = psycopg2.connect("dbname='logger' user='polina' host='kuranov.sknt.ru' port='8000' password='1675'")
+        print(conn)
+    except:
+        print("I am unable to connect to the database")
+        exit(0)
 
-            datetime.now().strftime("%d/%m/%Y %H:%M"): new_params
-        }
+    while 1:
+        datetime_now = datetime.now()
+        date_ = datetime_now.strftime("%d/%m/%Y")
+        time_ = datetime_now.strftime("%H:%M")
+        new_params = getData()
 
         if new_params['CPUTemp'] >= critical_params['CPUTemp'] or \
             new_params['GPUTemp'] >= critical_params['GPUTemp'] or \
@@ -88,6 +95,21 @@ def collect():
         # asd = new_params
 
         print(params.last_params)
+
+        query = f"insert into params values ('{date_}', '{time_}', {new_params['CPUTemp']}, {new_params['GPUTemp']},  {new_params['CPULoad']}, {new_params['GPULoad']}, {new_params['RAMLoad']});"
+        
+        print(query)
+
+        with conn.cursor() as curs:
+            try:
+                # simple multi row system query
+                curs.execute(query)
+
+                conn.commit()
+
+            # a more robust way of handling errors
+            except (Exception, psycopg2.DatabaseError) as error:
+                print(error)
 
         time.sleep(60)
 

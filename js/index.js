@@ -15,6 +15,8 @@ async function startPage()
         document.getElementById("CPULoad_critical").value = data["CPULoad_critical"];
         document.getElementById("GPULoad_critical").value = data["GPULoad_critical"];
         document.getElementById("RAMLoad_critical").value = data["RAMLoad_critical"];
+
+        
     });
 }
 
