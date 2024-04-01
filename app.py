@@ -45,7 +45,7 @@ def get_stat():
     inter = interval.interval_generator(start_date, end_date, 0)
 
     try:
-        conn = psycopg2.connect("dbname='logger' user='polina' host='kuranov.sknt.ru' port='8000' password='1675'")
+        conn = psycopg2.connect("dbname='logger' user='polina' host='kuranov.sknt.ru' port='8000' password='****'")
         # print(conn)
     except:
         print("I am unable to connect to the database")
