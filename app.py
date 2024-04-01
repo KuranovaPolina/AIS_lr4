@@ -13,6 +13,8 @@ import psycopg2
 from datetime import datetime
 from datetime import timedelta
 
+from passwords import password_db
+
 # initialize flask application
 app = Flask(__name__)
 
@@ -45,7 +47,7 @@ def get_stat():
     inter = interval.interval_generator(start_date, end_date, 0)
 
     try:
-        conn = psycopg2.connect("dbname='logger' user='polina' host='kuranov.sknt.ru' port='8000' password='****'")
+        conn = psycopg2.connect(f"dbname='logger' user='polina' host='kuranov.sknt.ru' port='8000' password='{password_db}'")
         # print(conn)
     except:
         print("I am unable to connect to the database")
@@ -122,7 +124,7 @@ def updateGraph():
     inter = interval.interval_generator(start_date, end_date, request.json['freq'])
 
     try:
-        conn = psycopg2.connect("dbname='logger' user='polina' host='kuranov.sknt.ru' port='8000' password='****'")
+        conn = psycopg2.connect(f"dbname='logger' user='polina' host='kuranov.sknt.ru' port='8000' password='{password_db}'")
         # print(conn)
     except:
         print("I am unable to connect to the database")

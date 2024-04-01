@@ -6,11 +6,18 @@ from datetime import datetime
 
 # from py.critical import critical_params
 import py.params as params
+
+import py.send_mail as send_mail
+
+import py.logger as logger
+
 import time
 
 import psycopg2
 # import gpustat
 # import sensors
+
+from passwords import password_db
 
 critical_params= {
     "CPUTemp": 1, 
@@ -70,7 +77,7 @@ def getData():
 
 def collect():
     try:
-        conn = psycopg2.connect("dbname='logger' user='polina' host='kuranov.sknt.ru' port='8000' password='****'")
+        conn = psycopg2.connect(f"dbname='logger' user='polina' host='kuranov.sknt.ru' port='8000' password='{password_db}'")
         print(conn)
     except:
         print("I am unable to connect to the database")
@@ -87,9 +94,9 @@ def collect():
             new_params['CPULoad'] >= critical_params['CPULoad'] or \
             new_params['GPULoad'] >= critical_params['GPULoad'] or \
             new_params['RAMLoad'] >= critical_params['RAMLoad']:
-            print("SOMETHING WRONG")
-            print(new_params)
-            print(critical_params)
+
+            send_mail.send_mail_main()
+            logger.log()
 
         params.last_params = new_params
         # asd = new_params
@@ -112,14 +119,3 @@ def collect():
                 print(error)
 
         time.sleep(60)
-
-# collect()
-# with open('data.json', 'a+') as file:
-#     file.write(json.dumps(new_data))
-#     file.write(',')
-#     file.write('\n')
-#     # print(new_data)
-#     # # # file.seek(0, 2)
-#     # json.dump(new_data, file)
-#     # json.dump(new_data, file)
-
