@@ -7,6 +7,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.bundle.min.js"></script>
 
         <!-- <meta http-equiv="refresh" content="5; url=http://www.yourdomain.com/yoursite.html"> -->
 
@@ -37,18 +38,18 @@
                 <div id="selectFreq">
                     <input type="radio" id="minute" name="freq" value="minute" checked>
                     <label for="minute">1 minute</label>
-                    <input type="radio" id="css" name="freq" value="hour">
+                    <input type="radio" id="hour" name="freq" value="hour">
                     <label for="hour">1 hour</label>
-                    <input type="radio" id="javascript" name="freq" value="day">
+                    <input type="radio" id="day" name="freq" value="day">
                     <label for="day">1 day</label>
-                    <input type="radio" id="javascript" name="freq" value="week">
+                    <input type="radio" id="week" name="freq" value="week">
                     <label for="week">1 week</label>
 
-                    <button>Перерисовать</button>
+                    <button onclick="updateGraph()">Перерисовать</button>
                 </div>
 
                 <div id="canvas">
-                    <canvas> </canvas>
+                    <canvas id="graph"> </canvas>
                 </div>
             </div>
  
