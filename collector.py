@@ -3,8 +3,6 @@ import psutil
 import json
 from datetime import datetime
 
-
-# from py.critical import critical_params
 import py.params as params
 
 import py.send_mail as send_mail
@@ -14,8 +12,8 @@ import py.logger as logger
 import time
 
 import psycopg2
-# import gpustat
-# import sensors
+
+import pyspectator
 
 from passwords import password_db
 
@@ -28,37 +26,43 @@ critical_params= {
 }
 
 def getCPUTemp():
-    # tmp = os.popen("powermetrics --samplers smc -n 1 |grep -i 'CPU die temperature'").read()
+    tmp = os.popen(" powermetrics --samplers smc -n 1 |grep -i 'CPU die temperature'").read()
 
-    # tmp = psutil.sensors_temperatures()
-    # print(tmp)
+    tmp = tmp.split(' ')
+    tmp = tmp[3]
 
-    # tmp = tmp.split(' ')
-    # tmp = tmp[3]
-
-    # return float(tmp)
-    return 0
+    return float(tmp)
 
 def getGPUTemp():
-    # tmp = os.popen("sudo powermetrics --samplers smc -n 1 |grep -i 'GPU die temperature'").read()
-    # if (not tmp):
-    #     tmp = os.popen("sudo powermetrics --samplers smc -n 1 |grep -i 'CPU die temperature'").read()
+    tmp = os.popen(" powermetrics --samplers smc -n 1 |grep -i 'GPU die temperature'").read()
+    if (not tmp):
+        tmp = os.popen(" powermetrics --samplers smc -n 1 |grep -i 'CPU die temperature'").read()
 
-    # tmp = tmp.split(' ')
-    # tmp = tmp[3]
+    tmp = tmp.split(' ')
+    tmp = tmp[3]
 
-    # return float(tmp)
-    return 0
+    return float(tmp)
 
 def getCPULoad():
-    return psutil.cpu_percent()
+    tmp = os.popen(" powermetrics -n 1 |grep -i 'Avg Num of Cores Active'").read()
+
+    tmp = (float(tmp.split(' ')[5])) * 100 / 8
+
+    return (tmp)
 
 def getGPULoad():
-    # return gpustat.percent()
-    return 0
+    tmp = os.popen("powermetrics -n 1 |grep -i 'GPU Active'").read()
+
+    tmp = tmp.split(' ')[2].split('%')[0]
+
+    return float(tmp)
 
 def getRAMLoad():
-    return psutil.virtual_memory().percent
+    virtual_use = psutil.virtual_memory().used
+    virtual_total = psutil.virtual_memory().total
+    # swap_use = psutil.swap_memory().used
+    # swap_total = psutil.swap_memory().total
+    return  (virtual_use * 100 / virtual_total)
 
 def getData():
     res = {'CPUTemp': 0,

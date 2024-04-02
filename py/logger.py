@@ -9,9 +9,14 @@ def log(date):
     log_header = f"[{date}] Exceeding the critical value \n"
     log_message += log_header
 
+    # print(psutil.pids())
+
     for pid in psutil.pids():
-        log = f"\tPID: {psutil.Process(pid).pid} - {psutil.Process(pid).name()}\n"
-        log_message += log
+        try:
+            log = f"\tPID: {psutil.Process(pid).pid} - {psutil.Process(pid).name()}\n"
+            log_message += log
+        except:
+            print("error")
 
     logging.info(log_message)
 

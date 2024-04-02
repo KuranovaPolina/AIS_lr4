@@ -119,6 +119,12 @@ async function updateGraph()
         freq = 3;
     }
 
+    // let startday = document.getElementById("startday").value; 
+    // let endday = document.getElementById("endday").value; 
+
+    // console.log(startday);
+    // console.log(endday);
+
     await fetch('/updateGraph', {method: 'POST',  
         headers: {
             Accept: 'application/json',
@@ -126,6 +132,9 @@ async function updateGraph()
         }, 
         body: JSON.stringify({
             freq: freq
+            // ,
+            // startday: (startday), 
+            // endday: (endday)
         })}).then(response => response.json()).then(async data => {
             console.log(data);
 

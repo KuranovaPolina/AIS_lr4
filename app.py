@@ -10,10 +10,10 @@ import py.interval as interval
 import threading
 import psycopg2
 
-from datetime import datetime
+from datetime import datetime, timezone
 from datetime import timedelta
 
-from passwords import password_db
+from passwords import password_db, start_date, end_date
 
 # initialize flask application
 app = Flask(__name__)
@@ -41,8 +41,8 @@ def get_stat():
     GPULoads = []
     RAMLoads = []
 
-    start_date = datetime.strptime('2024-04-01 13:50', '%Y-%m-%d %H:%M')
-    end_date = datetime.strptime('2024-04-01 15:50', '%Y-%m-%d %H:%M')
+    # start_date = datetime.strptime('2024-04-01 13:50', '%Y-%m-%d %H:%M')
+    # end_date = datetime.strptime('2024-04-01 15:50', '%Y-%m-%d %H:%M')
 
     inter = interval.interval_generator(start_date, end_date, 0)
 
@@ -116,10 +116,17 @@ def updateGraph():
     GPULoads = []
     RAMLoads = []
 
-    start_date = datetime.strptime('2024-04-01 13:50', '%Y-%m-%d %H:%M')
-    end_date = datetime.strptime('2024-04-01 15:50', '%Y-%m-%d %H:%M')
+    # print("request.json['startday']")
+    # print(request.json['startday'])
+    # print(request.json['endday'])
 
-    print(request.json['freq'])
+    # if request.json['startday']:
+    #     d = datetime.fromisoformat( request.json['startday'][:-1]).astimezone(timezone.utc)
+    #     d.strftime('%Y-%m-%d %H:%M:%S')
+    #     print(d)
+
+    # if request.json['endday'] != "":
+    #     print(datetime.strptime(request.json['endday'], '%Y-%M-%DT%H:%M'))
 
     inter = interval.interval_generator(start_date, end_date, request.json['freq'])
 
